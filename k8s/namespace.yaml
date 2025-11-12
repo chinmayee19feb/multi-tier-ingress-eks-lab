@@ -1,0 +1,6 @@
+apiVersion: v1        # Kubernetes API version
+kind: Namespace      # # Type of resource we're creating
+metadata:
+  name: demo-chinmayee    # Namespace name (demo-chinmayee)
+  labels:
+    name: demo-chinmayee  # Label for the namespace (demo-chinmayee)
