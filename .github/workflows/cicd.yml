@@ -109,9 +109,21 @@ jobs:
 
       - name: Verify access
         run: |
-          kubectl version --short
+          # Print kubectl client/version info — be resilient to different kubectl builds
+          echo "=== kubectl version info ==="
+          if kubectl version --client --short >/dev/null 2>&1; then
+            kubectl version --client --short
+          elif kubectl version --short >/dev/null 2>&1; then
+            kubectl version --short
+          else
+            echo "kubectl --short not available; printing full version output"
+            kubectl version || true
+          fi
+          echo "=== kubectl namespaces ==="
           kubectl get ns
+          echo "=== kubectl ingress (all namespaces) ==="
           kubectl get ingress -A || true
+
 
       # Ensure namespace exists (idempotent for students)
       - name: Create namespace if missing
