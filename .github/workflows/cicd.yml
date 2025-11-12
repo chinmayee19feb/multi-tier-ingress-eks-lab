@@ -123,8 +123,7 @@ jobs:
           kubectl get ns
           echo "=== kubectl ingress (all namespaces) ==="
           kubectl get ingress -A || true
-
-
+          
       # Ensure namespace exists (idempotent for students)
       - name: Create namespace if missing
         run: |
