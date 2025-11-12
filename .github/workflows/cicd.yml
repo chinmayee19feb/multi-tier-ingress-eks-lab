@@ -49,8 +49,7 @@ jobs:
           # Try to push
           echo "Pushing test image to Docker Hub..."
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-access:latest
-    
-    echo "=== Test completed ==="
+        echo "=== Test completed ==="
       - name: Set up QEMU (for optional multi-arch)
         uses: docker/setup-qemu-action@v3
 
