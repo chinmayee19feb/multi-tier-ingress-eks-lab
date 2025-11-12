@@ -36,7 +36,21 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+      - name: Test Docker Hub Access with Simple Image
+        run: |
+          echo "=== Testing Docker Hub push with hello-world ==="
+          
+          # Pull a small test image
+          docker pull hello-world:latest
+          
+          # Tag it for your Docker Hub account
+          docker tag hello-world:latest ${{ secrets.DOCKERHUB_USERNAME }}/test-access:latest
+          
+          # Try to push
+          echo "Pushing test image to Docker Hub..."
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-access:latest
+    
+    echo "=== Test completed ==="
       - name: Set up QEMU (for optional multi-arch)
         uses: docker/setup-qemu-action@v3
 
